@@ -1,0 +1,118 @@
+﻿@page "/admin/commentaccept/{pageid?}"
+@model AdminCommentAcceptModel
+@using OrzhansJozve.Utilities
+@inject OrzhansJozve.DataLayer.Repositories.IPageRepository _pageRepository
+@{
+    ViewData["Title"] = "تایید نظرات";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- CommentAccept -->
+@if (Model.Message != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bginfo actionIcon addbtnaction"> <i class="fa fa-check actionIcon2"></i>@Model.Message</div></div>
+    </div>
+}
+<div>
+    <div class=""><a asp-page-handler="DeleteAllCommentsNotAccept" class="bgred actionIcon addbtnaction"> <i class="fa fa-trash actionIcon2"></i>حذف تمام کامنت های برسی نشده</a></div>
+</div>
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>آخرین  نظرات</h3> </header>
+    @if (Model.CommentsList.Count != 0)
+    {
+        <ul>
+            @foreach (var item in Model.CommentsList)
+            {
+
+                <li class="admin-author-fild">
+                    <div>
+                        <img loading="lazy" class="admin-mobile-author-image border-radius admin-author-img boxshadow author-img-admin-panel col-12" src="~/images/user-compressor.png">
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="boxshadow admin-author-name">
+                            <p class="color-white"><span class="color-white pad0 text-bolder">عنوان مقاله :</span> @_pageRepository.SelectById(item.PageId).PageTitle</p>
+                        </div>
+                        <div class="boxshadow admin-author-short-description">
+                            <p class="color-white"><span class="color-white pad0 text-bolder">نام نظر دهنده :</span> @item.CommentAuthorName</p>
+                        </div>
+                        @if (item.CommentAuthorWebsite != null)
+                        {
+                            <div class="admin-comment-website">
+                                <p class="color-white"><span class="color-white pad0 text-bolder">آدرس وب سایت نظر دهنده :</span> @item.CommentAuthorWebsite</p>
+                            </div>
+                        }
+                        <div class="boxshadow admin-comment-email">
+                            <p class="color-white"><span class="color-white pad0 text-bolder">ایمیل نظر دهنده :</span> @item.CommentAuthorEmail</p>
+                        </div>
+                        <div class="boxshadow admin-author-short-description">
+                            <p class="pad0 color-white text-bolder">متن نظر :</p>
+                            <h2 class="color-white"> @item.CommentAuthorText</h2>
+                        </div>
+                        <div class="boxshadow admin-author-date">
+                            <div class="date-publish cleardatepossition centertext color-white"><i class="fa fa-calendar"></i> انتشار : @item.CommentCreateDate.ToShamsi()</div>
+                        </div>
+                        <div class="row margin-top-20 centertext">
+                            <div class="col-xs-12 col-md-6"><a asp-page-handler="Relese" asp-route-id="@item.CommentId" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</a></div>
+                            <div class="col-xs-12 col-md-6"><a asp-page-handler="Delete" asp-route-id="@item.CommentId" class="bgred actionIcon articelactionicon"><i class="fa fa-trash actionIcon2"></i>حذف شود</a></div>
+                        </div>
+                    </div>
+                </li>
+
+            }
+        </ul>
+    }
+    else
+    {
+        <ul><li class="centertext"><i class="fa fa-comment"></i> متاسفانه نظری وجود ندارد <i class="fa fa-comment"></i></li></ul>
+    }
+</section>
+@if (Model.CommentsList.Count != 0)
+{
+    <div class="row text-center">
+        <nav>
+            <ul class="pagination">
+                @if (((int)ViewData["PageID"]) != 1)
+                {
+                    <li class=""><a aria-label="Previous" asp-route-pageid="@((int)ViewData["PageID"] - 1)"><span aria-hidden="true">«</span></a></li>
+                }
+                else
+                {
+                    <li class="disabled"><a aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                }
+                @if (((int)ViewData["PageID"] > 3))
+                {
+                    @for (int i = ((int)ViewData["PageID"]) - 2; i <= ((int)ViewData["PageCount"]); i++)
+                    {
+                        <li class="@(((int)ViewData["PageID"]==i)?"active":"")"><a asp-route-pageid="@i">@i<span class="sr-only">(current)</span></a></li>
+                        @if (i == ((int)ViewData["PageID"]) + 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    @for (int i = 1; i <= ((int)ViewData["PageCount"]); i++)
+                    {
+                        <li class="@(((int)ViewData["PageID"]==i)?"active":"")"><a asp-route-pageid="@i">@i<span class="sr-only">(current)</span></a></li>
+                        @if (i == ((int)ViewData["PageID"]) + 4)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                @if (((int)ViewData["PageID"]) != ((int)ViewData["PageCount"]))
+                {
+                    <li><a aria-label="Next" asp-route-pageid="@((int)ViewData["PageID"] + 1)"><span aria-hidden="true">»</span></a></li>
+                }
+                else
+                {
+                    <li class="disabled"><a aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+}
+<!-- End CommentAccept -->

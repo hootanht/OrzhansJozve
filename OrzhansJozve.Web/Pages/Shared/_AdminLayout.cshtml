@@ -1,0 +1,77 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"] - پنل ادمین اورژانس جزوه</title>
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="~/lib/rtl-bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/rtl-bootstrap/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/OwlCarousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Admin/css/style.css">
+</head>
+<body>
+    <script src="~/lib/modernizr-3.6.0/modernizr-3.6.0.min.js"></script>
+    <!-- header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <a href="/admin/articel" class="logo"><img loading="lazy" class="top-image" src="~/images/orzhansjozve-dark-logo.png" alt="" title=""></a>
+                    <div class="left-side">
+                        <h1><a href="/admin/articel">سایت اخبار اورژانس جزوه</a></h1>
+                        <h2>بهترین در زمینه ی اخبار و اطلاعات دنیای دانشجویی</h2>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <form method="post" class="border-radius boxshadow">
+                        <input class="border-radius" type="text" name="query" placeholder=" جستجو کنید ... ">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- menu -->
+    <nav class="main-menu">
+        <div class="container">
+            <span><i class="fa fa-th-list"></i></span>
+            <ul>
+                <li><a href="/admin/articel"> صفحه اصلی </a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End menu -->
+    <div class="container margin-top-30">
+        <div class="row">
+            <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
+                <partial name="_AdminActionPartial" />
+                <partial name="_AdminDashboardPartial" />
+            </aside>
+            <div class="col-md-8 col-sm-12 col-xs-12 ">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery-admin/jquery.min.js"></script>
+    <script src="~/lib/rtl-bootstrap/bootstrap.min.js"></script>
+    <script src="~/lib/OwlCarousel/owl.carousel.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Admin/js/script.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿@page "/admin/addinsideaticelimage"
+@model AdminAddInsideAticelImageModel
+@{
+    ViewData["Title"] = "افزودن عکس جدید";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Add InsideAticelImage -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>افزودن عکس جدید</h3> </header>
+    <ul>
+        <li>
+            <form method="post" enctype="multipart/form-data" class="form-group" id="AddNewAds">
+                <label asp-for="InsideAticelImageModel.InsideAticelImageTitle"></label>
+                <input asp-for="InsideAticelImageModel.InsideAticelImageTitle" class="form-control" />
+                <span asp-validation-for="InsideAticelImageModel.InsideAticelImageTitle" class="text-danger displayblock"></span>
+                <label asp-for="InsideAticelImageModel.InsideAticelImageName" class="margin-top-20"></label>
+                <input type="file" name="insideAticelImage" class="form-control" />
+                <span asp-validation-for="InsideAticelImageModel.InsideAticelImageName" class="text-danger displayblock"></span>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="AddInsideAticelImage" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End AddInsideAticelImage -->

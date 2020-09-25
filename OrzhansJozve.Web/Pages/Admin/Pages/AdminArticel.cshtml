@@ -1,0 +1,97 @@
+﻿@page "/admin/articel/{pageid?}"
+@model AdminArticelModel
+@using OrzhansJozve.Utilities
+@{
+    ViewData["Title"] = "اخبار";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Articel -->
+@if (Model.Message != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bginfo actionIcon addbtnaction"> <i class="fa fa-check actionIcon2"></i>@Model.Message</div></div>
+    </div>
+}
+<div>
+    <div class=""><a asp-page="AddNewArticel" class="bginfo actionIcon addbtnaction"> <i class="fa fa-plus-circle actionIcon2"></i>افزودن خبر جدید</a></div>
+</div>
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>آخرین  اخبار  ارسالی</h3> </header>
+    @if (Model.Pages.Count != 0)
+    {
+        <ul>
+            @foreach (var item in Model.Pages)
+            {
+                <li>
+                    <img loading="lazy" class="border-radius admin-mobile-image boxshadow" src="~/Blog-Content/Articel-Images/@item.PageImageUrl">
+                    <h2> <a class="admin-articel-header" asp-page="/ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ","-")"> @item.PageTitle </a></h2>
+                    <p>
+                        @item.PageShortDiscription
+                    </p>
+                    <div class="centertext">
+                        <span class="date-publish admin-articel-date-relese"><i class="fa fa-calendar"></i> انتشار : @item.PageCreateDate.ToShamsi() </span>
+                    </div>
+                    <div class="row display-initial margin-top-20 centertext">
+                        <div class="col-xs-12 col-md-4"><a asp-page="/ArticelShortLink" asp-route-key="@item.Shortkey" class="bginfo actionIcon articelactionicon" target="_blank"> <i class="fa fa-info-circle actionIcon2"></i>جزئیات</a></div>
+                        <div class="col-xs-12 col-md-4"><a asp-page="AdminEditArticel" asp-route-id="@item.PageId" class="bgwarning actionIcon articelactionicon"><i class="fa fa-book actionIcon2"></i>ویرایش</a></div>
+                        <div class="col-xs-12 col-md-4"><a asp-page-handler="Delete" asp-route-id="@item.PageId" class="bgred actionIcon articelactionicon"><i class="fa fa-trash actionIcon2"></i>حذف</a></div>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <ul><li class="centertext"><i class="fa fa-book"></i> متاسفانه خبری وجود ندارد <i class="fa fa-book"></i></li></ul>
+    }
+</section>
+@if (Model.Pages.Count != 0)
+{
+    <div class="row text-center">
+        <nav>
+            <ul class="pagination">
+                @if (((int)ViewData["PageID"]) != 1)
+                {
+                    <li class=""><a aria-label="Previous" asp-route-pageid="@((int)ViewData["PageID"] - 1)"><span aria-hidden="true">«</span></a></li>
+                }
+                else
+                {
+                    <li class="disabled"><a aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                }
+                @if (((int)ViewData["PageID"] > 3))
+                {
+                    @for (int i = ((int)ViewData["PageID"]) - 2; i <= ((int)ViewData["PageCount"]); i++)
+                    {
+                        <li class="@(((int)ViewData["PageID"]==i)?"active":"")"><a asp-route-pageid="@i">@i<span class="sr-only">(current)</span></a></li>
+                        @if (i == ((int)ViewData["PageID"]) + 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    @for (int i = 1; i <= ((int)ViewData["PageCount"]); i++)
+                    {
+                        <li class="@(((int)ViewData["PageID"]==i)?"active":"")"><a asp-route-pageid="@i">@i<span class="sr-only">(current)</span></a></li>
+                        @if (i == ((int)ViewData["PageID"]) + 4)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                @if (((int)ViewData["PageID"]) != ((int)ViewData["PageCount"]))
+                {
+                    <li><a aria-label="Next" asp-route-pageid="@((int)ViewData["PageID"] + 1)"><span aria-hidden="true">»</span></a></li>
+                }
+                else
+                {
+                    <li class="disabled"><a aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                }
+            </ul>
+        </nav>
+    </div>
+}
+<!-- End Articel -->

@@ -1,0 +1,256 @@
+﻿@page "/articel/{pageId}/{title}"
+@model ArticelPageModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    ViewData["Title"] = @Model.SingelPage.PageTitle.Trim().Replace("-", " ");
+    string site = "orzhansjozve.ir";
+    string mainSite = "https://orzhansjozve.ir";
+}
+@inject OrzhansJozve.DataLayer.Repositories.IAuthorRepository _authorService
+@inject OrzhansJozve.DataLayer.Repositories.IAdsRepository _iadsRepository
+@using OrzhansJozve.Utilities
+
+@if (Model.Message != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bg-success actionIcon addbtnaction"> <i class="fa fa-check actionIcon2"></i>@Model.Message</div></div>
+    </div>
+}
+@if (Model.reCAPTCHAMessage != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bg-danger actionIcon addbtnaction"> <i class="fa fa-robot actionIcon2"></i>@Model.reCAPTCHAMessage</div></div>
+    </div>
+}
+<!-- Blog Area Start Here -->
+<section class="single-blog-wrap-layout1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="single-blog-box-layout1">
+                    <div class="post-img">
+                        <img loading="lazy" src="~/Blog-Content/Articel-Images/@Model.SingelPage.PageImageUrl" alt="@Model.SingelPage.PageTitle" title="@Model.SingelPage.PageTitle" class="w-100 img-fluid background-shadow">
+                    </div>
+                    <div class="item-content">
+                        <div class="post-tag gradient-accent"><a title="@Model.SingelPageGroup.PageGroupTitle" class="text-decoration-none text-white" asp-page="Index" asp-page-handler="PageGroup" asp-route-query="@Model.SingelPageGroup.PageGroupTitle">@Model.SingelPageGroup.PageGroupTitle</a></div>
+                        <h1 title="@Model.SingelPage.PageTitle" class="item-title text-center text-lg-right">@Model.SingelPage.PageTitle</h1>
+                        <div class="entry-content">
+                            <ul class="entry-meta">
+                                <li title="نویسنده : @_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName"><i class="far fa-user-circle"></i><a title="نویسنده : @_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName" class="text-decoration-none author-color" asp-page="ArticelSearch" asp-route-s="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName.Replace(" ","-")">@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName</a></li>
+                                <li title="تاریخ انتشار : @Model.SingelPage.PageCreateDate.ToShamsi()"><i class="far fa-clock"></i><a title="تاریخ انتشار : @Model.SingelPage.PageCreateDate.ToShamsi()" class="text-decoration-none author-color" asp-page="ArticelSearch" asp-route-s="@Model.SingelPage.PageCreateDate.ToShamsi().Replace(" ","-")">@Model.SingelPage.PageCreateDate.ToShamsi()</a></li>
+                                <li title="نظرات"><i class="far fa-comment-dots"></i>@Model.CommentsList.Count.ToKNumber()</li>
+                                <li title="تعداد بازدید"><i class="far fa-eye"></i>@(Model.SingelPage.PageView.ToKNumber())</li>
+                            </ul>
+                            <ul class="item-social text-center text-lg-right">
+                                <li><a title="اشتراک گذاری در تلگرام" target="_blank" href=@($"https://t.me/share/url?url={mainSite}/a/{Model.SingelPage.Shortkey}") class="bg-telegram"><i class="fab fa-telegram-plane share-icons"></i></a></li>
+                                <li><a title="اشتراک گذاری در تویتر" target="_blank" href=@($"https://twitter.com/intent/tweet?url={mainSite}/a/{Model.SingelPage.Shortkey}") class="bg-twitter"><i class="fab fa-twitter share-icons"></i></a></li>
+                                <li><a title="اشتراک گذاری در واتس اپ" target="_blank" href=@($"whatsapp://send?text={mainSite}/a/{Model.SingelPage.Shortkey}") class="bg-whatsapp" data-action="share/whatsapp/share"><i class="fab fa-whatsapp share-icons"></i></a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="text-center text-lg-right" title="زمان مورد نیاز برای مطالعه : @Model.SingelPage.ReadingTime"><i class="fas fa-glasses read-more-icon"></i>زمان مورد نیاز برای مطالعه : <span class="text-success">@Model.SingelPage.ReadingTime</span></li>
+                            </ul>
+                            <hr class="mt-4" />
+                        </div>
+                        <article class="description">
+                            @Html.Raw(Model.SingelPage.PageContent)
+                        </article>
+                    </div>
+                    @if (Model.SingelPage.PageVideoUrl != null)
+                    {
+                        <div>
+                            <hr />
+                            <div><h2 title="@Model.SingelPage.PageVideoTitle" class="mt-4 text-center">@Model.SingelPage.PageVideoTitle</h2></div>
+                            @Html.Raw(Model.SingelPage.PageVideoUrl)
+                        </div>
+                    }
+                    @if (Model.SingelPage.PagePodcastUrl != null)
+                    {
+                        <hr />
+                        <div>
+                            <div><h2 class="mt-4 text-center text-lg-right" title="گوینده : @Model.SingelPage.PagePodcastAuthor">گوینده : @Model.SingelPage.PagePodcastAuthor</h2></div>
+                            <audio controls="controls" preload="none" class="w-100 mb-5" title="گوینده : @Model.SingelPage.PagePodcastAuthor">
+                                <source src="~/Blog-Content/Podcasts/@Model.SingelPage.PagePodcastUrl" />
+                            </audio>
+                        </div>
+                    }
+                    <div class="item-tag">
+                        <ul>
+                            <li><i class="fas fa-tags"></i></li>
+                            @foreach (var item in Model.SingelPage.PageTags.Split("-").ToList())
+                            {
+                                <li><a class="articel-tags text-white background-shadow" title="@item.ToString()" asp-page="ArticelSearch" asp-route-s="@item.ToString()">@item.ToString()</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="pagination-layout3">
+                        <h2 title="اخبار مرتبط" class="mortabet text-center text-md-right">اخبار مرتبط</h2>
+                        <div class="row">
+                            @foreach (var item in Model.SimilarPageList)
+                            {
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-12 seo">
+                                    <div class="service-box-layout9">
+                                        <div class="item-img background-shadow">
+                                            <a title="@item.PageTitle" asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()"><img loading="lazy" src="~/Blog-Content/Articel-Images/@item.PageSecondImageUrl" alt="@item.PageTitle" title="@item.PageTitle" class="same-articel-img"></a>
+                                        </div>
+                                        <div class="item-content pt-0 text-center">
+                                            <h3 title="@item.PageTitle" class="item-title similar-articel-font"><a asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()">@item.PageTitle</a></h3>
+                                            <a title="@Model._pageGroupRepository.SelectById(item.PageGroupId).PageGroupTitle" class="text-decoration-none similar-articel-subtitle text-black-50" asp-page="Index" asp-page-handler="PageGroup" asp-route-query="@Model._pageGroupRepository.SelectById(item.PageGroupId).PageGroupTitle" asp-route-pageId=""><div class="item-subtitle similar-articel-subtitle-div background-shadow"><span title="@Model._pageGroupRepository.SelectById(item.PageGroupId).PageGroupTitle">@Model._pageGroupRepository.SelectById(item.PageGroupId).PageGroupTitle</span></div></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    @if (Model.CommentsList.Count != 0)
+                    {
+                        <div class="blog-comment">
+                            <div class="heading-layout7">
+                                <h3 title="نظرات"><span>(@Model.CommentsList.Count)</span> نظرات </h3>
+                            </div>
+                            @foreach (var item in Model.CommentsList)
+                            {
+                                <div class="media media-none--xs p-4 background-shadow border-15px mt-4">
+                                    <div class="item-img mb-auto">
+                                        <img loading="lazy" src="~/images/user-compressor.png" class="media-img-auto user-img-with mt-auto mb-auto" alt="@item.CommentAuthorName" title="@item.CommentAuthorName">
+                                    </div>
+                                    <div class="media-body mr-0 mr-md-4">
+                                        <h5 class="item-title text-md-right text-sm-center" title="@item.CommentAuthorName">@item.CommentAuthorName</h5>
+                                        <div class="item-date" title="تاریخ انتشار : @item.CommentCreateDate.ToShamsi()">@item.CommentCreateDate.ToShamsi()</div>
+                                        <p class="text-md-right text-sm-center">@item.CommentAuthorText</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center mb-3"><p title="اولین نفری باشید که در مورد این خبر نظر می دهید">اولین نفری باشید که در مورد این خبر نظر می دهید</p></div>
+                    }
+                    <div class="blog-form">
+                        <div class="heading-layout7">
+                            <h3 title="ارسال یک دیدگاه">ارسال یک دیدگاه</h3>
+                        </div>
+                        <div class="contact-form-box-layout1">
+                            <form class="contact-form-box" id="contact-form" method="post" asp-page-handler="PushCooment">
+                                <input type="hidden" name="captcha" id="captchaInput" value="" />
+                                <div class="row gutters-15">
+                                    <div class="col-lg-4 col-md-6 col-12 form-group">
+                                        <input title="نام شما" asp-for="Comment.CommentAuthorName" class="form-control background-shadow bg-white" placeholder="نام شما *" />
+                                        <span asp-validation-for="Comment.CommentAuthorName" class="text-danger displayblock"></span>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-12 form-group">
+                                        <input title="ایمیل شما" asp-for="Comment.CommentAuthorEmail" class="form-control background-shadow bg-white" placeholder="ایمیل شما *" />
+                                        <span asp-validation-for="Comment.CommentAuthorEmail" class="text-danger displayblock"></span>
+                                    </div>
+                                    <div class="col-lg-4 col-12 form-group">
+                                        <input title="وب سایت شما" asp-for="Comment.CommentAuthorWebsite" class="form-control background-shadow bg-white" placeholder="وب سایت" />
+                                        <span asp-validation-for="Comment.CommentAuthorWebsite" class="text-danger displayblock"></span>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <textarea title="نظر خود وارد کنید" asp-for="Comment.CommentAuthorText" placeholder="نظر خود را تایپ کنید *" class="textarea bg-white background-shadow form-control" id="form-message" rows="5" cols="20"></textarea>
+                                        <span asp-validation-for="Comment.CommentAuthorText" class="text-danger displayblock"></span>
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <button title="تایید" asp-page-handler="PushCooment" type="submit" class="btn-fill-3 gradient-accent background-shadow">تایید<i class="fas fa-chevron-right boxshadow"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-response"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-12 sidebar-widget-area sidebar-break-md">
+                <div class="widget widget-search-box rounded-lg">
+                    <form method="get" asp-page="ArticelSearch" asp-page-handler="Search">
+                        <div class="input-group stylish-input-group p-0 pr-3">
+                            <input title="جست و جو" type="text" name="s" class="form-control" placeholder="جستجو در اینجا . . .">
+                            <span class="input-group-addon">
+                                <button title="جست و جو کن" type="submit" asp-page="ArticelSearch" asp-page-handler="Search" class="p-3 ml-1">
+                                    <span class="flaticon-magnifying-glass" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <section class="aside-box widget bg-white widget-category rounded-lg">
+                    <a title="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName" asp-page="ArticelSearch" asp-route-s="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName.Replace(" ","-")" class="text-center d-block">
+                        <img loading="lazy" class="author-image-articel img-fluid rounded rounded-circle background-shadow" title="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName" alt="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName" src="~/Blog-Content/Author-Images/@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorImageUrl" data-was-processed="true">
+                    </a>
+                    <header><h2 class="text-center mt-4 textAuthor" title="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName">نویسنده : <a asp-page="ArticelSearch" asp-route-s="@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName.Replace(" ","-")" class="text-success text-decoration-none">@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorName</a></h2></header>
+                    <div class="text-center p-2 text-justify">
+                        <p class="m-0">@_authorService.SelectById(Model.SingelPage.AuthorId).AuthorShortDescription</p>
+                    </div>
+                </section>
+                @if (Model.SingelPage.Shortkey != null)
+                {
+                    <div class="widget widget-tag bg-white">
+                        <div class="heading-layout5">
+                            <h3 title="لینک کوتاه خبر">لینک کوتاه خبر</h3>
+                        </div>
+                        <ul class="item-tag text-center">
+                            <li id="testcopy"><a class="background-shadow row p-4" title="@($"{site}/a/{Model.SingelPage.Shortkey}")" id="copylink"><span id="copylinkText">@($"{site}/a/{Model.SingelPage.Shortkey}")<span class="zmdi zmdi-link short-url-copy cpfont"></span></span></a></li>
+                        </ul>
+                        <div class="w-100 bg-success mt-3 p-2 rounded-lg" id="textcopydiv" hidden="hidden"><p class="text-white text-center mb-0">لینک کوتاه کپی شد</p></div>
+                    </div>
+                }
+                <partial name="MostVisitedPageGroupPartial" />
+                <partial name="LatestArticelPartial" />
+                <partial name="TopArticelPartial" />
+                @if (Model.SingelPage.PageKeyWords != null)
+                {
+                    <div class="widget widget-tag bg-white">
+                        <div class="heading-layout5">
+                            <h3 title="برچسب ها">برچسب ها</h3>
+                        </div>
+                        <ul class="item-tag">
+                            @foreach (var item in Model.SingelPage.PageKeyWords.Split("-").ToList())
+                            {
+                                <li><a class="background-shadow" title="@item" asp-page="ArticelSearch" asp-route-s="@item.ToString()">@item</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Area End Here -->
+@if (_iadsRepository.DownAdsExist())
+{
+    @await Component.InvokeAsync("DownAdsComponent")
+}
+@section meta{
+    <link rel="canonical" href="@mainSite/articel/@Model.SingelPage.PageId/@Model.SingelPage.PageTitle.Trim().Replace(" ", "-")" />
+    <meta name="description" content="@Model.SingelPage.PageShortDiscription">
+    <meta name="robots" content="index,follow">
+    @*open graph*@
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="@Model.SingelPage.PageTitle" />
+    <meta property="og:description" content="@Model.SingelPage.PageShortDiscription" />
+    <meta property="og:image" content="@mainSite/Blog-Content/Articel-Images/@Model.SingelPage.PageImageUrl" />
+    <meta property="og:image:url" content="@mainSite/Blog-Content/Articel-Images/@Model.SingelPage.PageImageUrl" />
+    <meta property="og:url" content="@mainSite/articel/@Model.SingelPage.PageId/@Model.SingelPage.PageTitle.Trim().Replace(" ", "-")" />
+    <meta property="og:site_name" content="اورژانس جزوه" />
+    <meta property="og:region" content="Tehran" />
+    <meta property="og:country-name" content="Iran" />
+    <!--keyword-->
+    <meta name=keywords content="@Model.SingelPage.PageKeyWords.Trim().Replace("-",",")">
+    <!--Twitter-->
+    <meta name="twitter:title" content="@Model.SingelPage.PageTitle">
+    <meta name="twitter:description" content="@Model.SingelPage.PageShortDiscription">
+    <meta name="twitter:image" content="@mainSite/Blog-Content/Articel-Images/@Model.SingelPage.PageImageUrl">
+    <meta name="twitter:site" content="@($"@orzhansjozve")">
+}
+@section Scripts{
+    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {
+            $("#captchaInput").val(token);
+        });
+    });
+    </script>
+}

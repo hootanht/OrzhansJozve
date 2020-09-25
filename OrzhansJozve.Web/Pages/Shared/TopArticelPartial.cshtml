@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var topPage = _pageService.SelectTopPage(4).ToList();
+}
+@inject OrzhansJozve.DataLayer.Repositories.IPageRepository _pageService
+@using OrzhansJozve.Utilities
+
+<div class="widget widget-related-case bg-white">
+    <div class="heading-layout5 mb-5">
+        <h3 title="محبوب ترین مقالات">محبوب ترین اخبار</h3>
+    </div>
+    @foreach (var item in topPage)
+    {
+        <div class="media media-none--xs latest-div-main">
+            <div class="item-img w-50 rounded-lg background-shadow">
+                <a title="@item.PageTitle" asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()"><img loading="lazy" src="~/Blog-Content/Articel-Images/@item.PageSecondImageUrl" class="media-img-auto articel-image-main" alt="@item.PageTitle" title="@item.PageTitle"></a>
+            </div>
+            <div class="media-body space-md mr-0 mr-md-4">
+                <h5 class="item-title">
+                    <a class="latest-articel-font" title="@item.PageTitle" asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()">@item.PageTitle</a>
+                </h5>
+                <div title="تاریخ انتشار : @item.PageCreateDate.ToShamsi()" class="case-date latest-articel-date index-createdate-box index-createdate-box-gradiant">@item.PageCreateDate.ToShamsi()</div>
+            </div>
+        </div>
+    }
+</div>

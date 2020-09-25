@@ -1,0 +1,23 @@
+﻿@page "/error/{id?}"
+@model ErrorModel
+@{
+    ViewData["Title"] = "صفحه پیدا نشد";
+}
+
+<!-- Error Page Area Start Here -->
+<section class="error-page-wrap-layout1">
+    <div class="container">
+        <div class="error-page-box-layout1">
+            <div class="error-img">
+                <img loading="lazy" src="~/images/404.png" alt="404">
+            </div>
+            <h2 class="item-title">وای! این صفحه را نمیتوان یافت</h2>
+            <div class="item-subtitle">با عرض پوزش، اما صفحه مورد نظر شما موجود نیست</div>
+            <a asp-page="Index" class="item-btn">برو به صفحه اصلی</a>
+        </div>
+    </div>
+</section>
+<!-- Error Page Area End Here -->
+@section meta{
+    <meta name="robots" content="index,follow">
+}

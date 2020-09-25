@@ -1,0 +1,237 @@
+﻿@inject OrzhansJozve.DataLayer.Repositories.IFooterLinkRepository _footerLinkRepository
+<!DOCTYPE html>
+<html class="no-js" lang="fa-IR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta name="language" content="fa" />
+    @RenderSection("meta", false)
+    <title>@ViewData["Title"] - اورژانس جزوه</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="msvalidate.01" content="9F86ECB78531253BFEF484610CB1569B" />
+    <environment names="Development">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico">
+        <!-- Normalize CSS -->
+        <link rel="stylesheet" href="~/lib/normalize/normalize.css">
+        <!-- Main CSS -->
+        <link asp-append-version="true" rel="stylesheet" href="~/css/main.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" href="~/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css">
+        <!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="~/lib/fontawesome-all/fontawesome-all.min.css">
+        <!-- Flat Icon CSS -->
+        <link rel="stylesheet" href="~/font/flaticon.css">
+        <!-- IRANSans Font CSS -->
+        <link href="~/lib/IRANSans/WebFonts/css/fontiran.css" rel="stylesheet" />
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="~/lib/animate/animate.css">
+        <!-- Zmdi CSS -->
+        <link href="~/lib/zmdi/css/material-design-iconic-font.css" rel="stylesheet" />
+        <!-- Meanmenu CSS -->
+        <link rel="stylesheet" href="~/lib/meanmenu/meanmenu.min.css">
+        <!-- Custom CSS -->
+        <link asp-append-version="true" rel="stylesheet" href="~/css/style.css">
+        <!-- tst -->
+        <link rel="stylesheet" href="~/lib/OwlCarousel/owl.carousel.css">
+        <link rel="stylesheet" href="~/lib/OwlCarousel/owl.theme.default.css">
+        @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">*@
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-163122730-1"></script>
+    <script src="https://www.google-analytics.com/analytics.js"></script>
+    <script defer>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            @RenderSection("SearchGoogleAnalitics",false)
+            gtag('config', 'UA-163122730-1');
+    </script>
+</head>
+
+<body class="sticky-header">
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+      <![endif]-->
+    <!-- ScrollUp Start Here -->
+    @*<a href="#wrapper" data-type="section-switch" class="scrollup background-shadow">
+            <i class="fas fa-angle-double-up"></i>
+        </a>*@
+    <!-- ScrollUp End Here -->
+    @*<div id="wrapper" class="wrapper">*@
+    <!-- Add your site or application content here -->
+    <!-- Header Area Start Here -->
+    <header class="header">
+        <div id="header-topbar" class="bg-primarytext">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="header-topbar-box">
+                            <ul class="header-contact">
+                                <li title="تلفن - 09382560424"><i class="fas fa-phone-volume"></i><a class="text-decoration-none text-white" href="tel:09382560424">09382560424</a></li>
+                                <li title="ایمیل - orzhansjozve@gmail.com"><i class="fas fa-envelope"></i><a class="text-decoration-none text-white" href="mailto:orzhansjozve@gmail.com">orzhansjozve@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex justify-content-end">
+                        <div class="header-topbar-box">
+                            <ul class="header-social-item">
+                                <li class="social-icon">
+                                    <a title="اینستاگرام اورژانس جزوه" href="https://www.instagram.com/orzhansjozveh"><i class="fab fa-instagram"></i></a>
+                                    <a title="تلگرام اورژانس جزوه" href="https://telegram.me/orzhansjozve"><i class="fab fa-telegram-plane"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="rt-sticky-placeholder"></div>
+        <div id="header-menu" class="header-menu menu-layout1">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-2">
+                        <div class="logo-area">
+                            <a title="اورژانس جزوه" asp-page="Index" class="temp-logo">
+                                <img loading="lazy" src="~/images/orzhansjozve-dark-logo.png" alt="اورژانس جزوه" title="اورژانس جزوه" class="img-fluid">
+                            </a>
+                            <a title="اورژانس جزوه" asp-page="Index" class="sticky-logo">
+                                <img loading="lazy" src="~/images/orzhansjozve-light-logo.png" alt="اورژانس جزوه" title="اورژانس جزوه" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 d-flex justify-content-start possition-static">
+                        <partial name="_NavBarPartial" />
+                    </div>
+                    <div class="col-lg-2 d-flex justify-content-end">
+                        <div class="header-action-layout1">
+                            <ul>
+                                <partial name="SearchViewPartial" />
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    @RenderBody()
+    <!-- Footer Area Start Here -->
+    <footer class="footer-wrap-layout1">
+        <div class="footer-top-wrap-layout1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="footer-box-layout1 text-center">
+                            <div class="footer-logo">
+                                <a title="اورژانس جزوه" asp-page="Index"><img loading="lazy" src="~/images/orzhansjozve-light-logo.png" alt="اورژانس جزوه" title="اورژانس جزوه"></a>
+                                <p class="text-center text-justify">
+                                    اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است.
+                                </p>
+                            </div>
+                            <ul class="footer-social">
+                                <li><a title="تلگرام اورژانس جزوه" href="https://telegram.me/orzhansjozve"><i class="fab fa-telegram-plane"></i></a></li>
+                                <li><a title="اینستاگرام اورژانس جزوه" href="https://www.instagram.com/orzhansjozveh"><i class="fab fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="footer-box-layout1">
+                            <div class="footer-title">
+                                <h3 title="لینک های مرتبط">لینک های مرتبط</h3>
+                            </div>
+                            @if (_footerLinkRepository.FooterLinkExist())
+                            {
+                                @await Component.InvokeAsync("FooterLinkComponent")
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <partial name="_NewsAgencyPeoplePartial" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-wrap-layout1">
+            <!-- Copy right -->
+            <div class="copyright" title="کپی رایت">
+                کپی رایت © 2020 توسط <a href="/" rel="nofollow" target="_blank">اورژانس جزوه</a> ، همه حقوق
+                این سایت محفوظ است.
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Area End Here -->
+    <!-- Search Box Start Here -->
+    <div id="header-search" class="header-search">
+        <button type="button" class="close">×</button>
+        <form class="header-search-form" method="get">
+            <input title="جست و جو" type="search" name="s" value="" placeholder="در اینجا تایپ کنید ........" />
+            <button title="جست و جو" type="submit" class="search-btn" asp-page="ArticelSearch" asp-page-handler="Search">
+                <i class="flaticon-magnifying-glass"></i>
+            </button>
+        </form>
+    </div>
+
+    <environment names="Development">
+        <!-- jquery-->
+        <script defer src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script defer src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script defer src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+        <script defer src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <!-- Plugins js -->
+        <script defer src="~/lib/plugins/plugins.min.js"></script>
+        <!-- Popper js -->
+        <script defer src="~/lib/popper/popper.js"></script>
+        <!-- Bootstrap js -->
+        <script defer src="~/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+        <script defer src="~/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Validator js -->
+        <script defer src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <!-- Meanmenu js -->
+        <script defer src="~/lib/jquery/dist/jquery.meanmenu.js"></script>
+        <!-- Modernize js -->
+        <script defer src="~/lib/modernizr-3.6.0/modernizr-3.6.0.min.js"></script>
+        <!-- tst -->
+        <script defer src="~/lib/OwlCarousel/owl.carousel.js"></script>
+        <!-- DarkJs -->
+        <script defer src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script defer src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+        <script defer src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <!--Link Scripts-->
+    <environment names="Staging,Production">
+        <script defer async asp-append-version="true" src="~/js/site.min.js"></script>
+    </environment>
+    @RenderSection("Scripts", false)
+    <!-- Main js -->
+    <environment names="Development">
+        <script defer asp-append-version="true" src="~/js/main.js"></script>
+    </environment>
+
+    @*Organization*@
+
+    <script defer type="application/ld+json">
+        {
+        "@@context" : "http://schema.org",
+        "@@type" : "Organization",
+        "name" : "orzhansjozve",
+        "url" : "https://orzhansjozve.ir",
+        "sameAs" : [
+        "https://telegram.me/orzhansjozve",
+        "https://www.instagram.com/orzhansjozveh",
+        "https://www.aparat.com/orzhansjozve"
+        ]
+        }
+    </script>
+</body>
+
+<!-- Mirrored from paradigm-shift.ir/optimax/optimax/blog1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Apr 2019 07:05:27 GMT -->
+
+</html>

@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace OrzhansJozve.Web.Pages
+{
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public class ErrorModel : PageModel
+    {
+        public string RequestId { get; set; }
+
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public string MainSite { get; set; }
+
+        public void OnGet()
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            MainSite = "https://orzhansjozve.ir";
+        }
+
+        
+        public IActionResult OnPostAddNewsAgencyPeople(string email)
+        {
+            return RedirectToPage("AddNewsAgencyPeople", new { email = email });
+        }
+    }
+}

@@ -1,0 +1,87 @@
+﻿@page "/admin/addnewarticel"
+@model AddNewArticelModel
+@{
+    ViewData["Title"] = "افزودن خبر جدید";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- AddNewArticel -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>افزودن خبر جدید</h3> </header>
+    <ul>
+        <li>
+            <form method="post" enctype="multipart/form-data" class="form-group" id="AddNewArticel">
+                <label asp-for="PageModel.PageTitle"></label>
+                <input asp-for="PageModel.PageTitle" class="form-control" />
+                <span asp-validation-for="PageModel.PageTitle" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageShortDiscription" class="margin-top-20"></label>
+                <input asp-for="PageModel.PageShortDiscription" class="form-control" />
+                <span asp-validation-for="PageModel.PageShortDiscription" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageImageUrl" class="margin-top-20"></label>
+                <p class="pad0">تذکر : سایز عکس بهتر است 830 در 450 باشد!</p>
+                <input type="file" name="mainImage" class="form-control" />
+                <span asp-validation-for="PageModel.PageImageUrl" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageSecondImageUrl" class="margin-top-20"></label>
+                <p class="pad0">تذکر : سایز عکس بهتر است 380 در 206 باشد!</p>
+                <input type="file" name="secondImage" class="form-control" />
+                <span asp-validation-for="PageModel.PageSecondImageUrl" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.ReadingTime" class="margin-top-20"></label>
+                <input asp-for="PageModel.ReadingTime" class="form-control" />
+                <span asp-validation-for="PageModel.ReadingTime" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageContent" class="margin-top-20"></label>
+                <textarea asp-for="PageModel.PageContent" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="PageModel.PageContent" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.Author.AuthorName" class="margin-top-20"></label>
+                <select asp-for="PageModel.AuthorId" class="form-control increaseheigh">
+                    @foreach (var item in Model.AuthorList)
+                    {
+                        <option value="@item.AuthorId">@item.AuthorName</option>
+                    }
+                </select>
+                <span asp-validation-for="PageModel.Author.AuthorName" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageGroup.PageGroupTitle" class="margin-top-20"></label>
+                <select asp-for="PageModel.PageGroupId" class="form-control increaseheigh">
+                    @foreach (var item in Model.PageGroupList)
+                    {
+                        <option value="@item.PageGroupId">@item.PageGroupTitle</option>
+                    }
+                </select>
+                <span asp-validation-for="PageModel.PageGroup.PageGroupTitle" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageKeyWords" class="margin-top-20"></label>
+                <input asp-for="PageModel.PageKeyWords" class="form-control" />
+                <span asp-validation-for="PageModel.PageKeyWords" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PagePodcastAuthor" class="margin-top-20"></label>
+                <input asp-for="PageModel.PagePodcastAuthor" class="form-control" />
+                <span asp-validation-for="PageModel.PagePodcastAuthor" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PagePodcastUrl" class="margin-top-20"></label>
+                <input type="file" name="podcast" class="form-control" />
+                <span asp-validation-for="PageModel.PagePodcastUrl" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageVideoTitle" class="margin-top-20"></label>
+                <input asp-for="PageModel.PageVideoTitle" class="form-control" />
+                <span asp-validation-for="PageModel.PageVideoTitle" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageVideoUrl" class="margin-top-20"></label>
+                <input asp-for="PageModel.PageVideoUrl" class="form-control" />
+                <span asp-validation-for="PageModel.PageVideoUrl" class="text-danger displayblock"></span>
+                <label asp-for="PageModel.PageShow" class="margin-top-20"></label>
+                <select asp-for="PageModel.PageShow" class="form-control increaseheigh margin-top-20">
+                    <option value="true">بله</option>
+                    <option selected value="false">خیر</option>
+                </select>
+                <span asp-validation-for="PageModel.PageShow" class="text-danger displayblock"></span>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="Add" name="AddNewArticel" value="AddNewArticel" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End AddNewArticel -->
+@section Scripts{
+    <script src="~/lib/CKEditor_HTML/ckeditor/ckeditor.js"></script>
+    <script src="~/lib/CKEditor_HTML/ckeditor/adapters/jquery.js"></script>
+    <script>
+        $(function () {
+            $('#PageModel_PageContent').ckeditor();
+        });
+    </script>
+}

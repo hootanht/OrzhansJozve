@@ -1,0 +1,39 @@
+﻿@page "/admin/addads"
+@model AdminAddAdsModel
+@{
+    ViewData["Title"] = "افزودن تبلیغ جدید";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- AddAdds -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>افزودن تبلیغ جدید</h3> </header>
+    <ul>
+        <li>
+            <form method="post" enctype="multipart/form-data" class="form-group" id="AddNewAds">
+                <label asp-for="AdsModel.AdsTitle"></label>
+                <input asp-for="AdsModel.AdsTitle" class="form-control" />
+                <span asp-validation-for="AdsModel.AdsTitle" class="text-danger displayblock"></span>
+                <label asp-for="AdsModel.AdsImageName" class="margin-top-20"></label>
+                <input type="file" name="adsImage" class="form-control" />
+                <span asp-validation-for="AdsModel.AdsImageName" class="text-danger displayblock"></span>
+                <label asp-for="AdsModel.AdsUrl" class="margin-top-20"></label>
+                <input asp-for="AdsModel.AdsUrl" class="form-control" />
+                <span asp-validation-for="AdsModel.AdsUrl" class="text-danger displayblock"></span>
+                <label asp-for="AdsModel.AdsRow" class="margin-top-20"></label>
+                <input asp-for="AdsModel.AdsRow" class="form-control" />
+                <span asp-validation-for="AdsModel.AdsRow" class="text-danger displayblock"></span>
+                <label asp-for="AdsModel.TopAds" class="margin-top-20"></label>
+                <select name="isTop" class="form-control increaseheigh">
+                    <option value="false">پایین صفحه</option>
+                    <option value="true">بالای صفحه</option>
+                </select>
+                <span asp-validation-for="AdsModel.TopAds" class="text-danger displayblock"></span>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="AddAdds" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End AddAdds -->

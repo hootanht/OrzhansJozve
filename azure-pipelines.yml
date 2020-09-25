@@ -1,0 +1,89 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+# YAML file in the master branch
+# schedules:
+# - cron: "30 22 * * *"
+#   displayName: Daily midnight build
+#   branches:
+#     include:
+#     - master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+
+
+steps:
+# MSBuild
+# Build with MSBuild
+# - task: MSBuild@1
+#   inputs:
+#     solution: '**/*.sln' 
+#     msbuildVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 4.0
+#     #msbuildArchitecture: 'x86' # Optional. Options: x86, x64
+#     #msbuildLocation: # Optional
+
+# - task: UseDotNet@2
+#   displayName: 'Install .NET Core SDK'
+#   inputs:
+#     version: 3.1.401
+#     performMultiLevelLookup: true
+
+# - task: UseDotNet@2
+#   displayName: 'Use .NET Core sdk'
+#   inputs:
+#     packageType: sdk
+#     version: 3.1.401
+#     installationPath: $(Agent.ToolsDirectory)/dotnet
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+     command: 'publish'
+     publishWebProjects: true
+     projects: 'OrzhansJozve.Web/OrzhansJozve.Web.csproj'
+     arguments: '-o testpath'
+     zipAfterPublish: false
+
+
+
+    
+- task: FtpUpload@2
+  inputs:
+    credentialsOption: 'inputs'
+    serverUrl: 'ftp://46.4.37.224'
+    username: 'orzahnsj'
+    password: 'hootanHT1376'
+    rootDirectory: '$(Build.SourcesDirectory)/testpath/OrzhansJozve.Web'
+    filePatterns: '**'
+    remoteDirectory: '/deploy.orzhansjozve.ir'
+    enableUtf8: true
+    cleanContents: false
+    preservePaths: true
+    clean: false
+    trustSSL: false

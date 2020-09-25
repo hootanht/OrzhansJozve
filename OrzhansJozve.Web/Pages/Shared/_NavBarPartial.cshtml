@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@inject OrzhansJozve.DataLayer.Repositories.IMasterPageRepository _masterPageGroupService
+@inject OrzhansJozve.DataLayer.Repositories.IPageGroupRepository _pageGroupService
+
+<nav id="dropdown" class="template-main-menu">
+    <ul>
+        <li>
+            <a title="خانه" asp-page="Index">خانه</a>
+        </li>
+        @foreach (var masterPageGroup in _masterPageGroupService.SelectAllByOrder().ToList())
+        {
+            <li>
+                <a title="@masterPageGroup.MasterPageGroupTitle" asp-page="Index" asp-page-handler="MasterPageGroup" asp-route-query="@masterPageGroup.MasterPageGroupTitle" asp-route-pageId="">@masterPageGroup.MasterPageGroupTitle</a>
+                @if (_masterPageGroupService.PageGroupExist(masterPageGroup.MasterPageGroupId))
+                {
+                    <ul class="dropdown-menu-col-1">
+                        @foreach (var pageGroup in _pageGroupService.GetAllPageGroupByMasterPageGroupFilter(masterPageGroup.MasterPageGroupId).ToList())
+                        {
+                            <li>
+                                <a title="@pageGroup.PageGroupTitle" asp-page="Index" asp-page-handler="PageGroup" asp-route-query="@pageGroup.PageGroupTitle" asp-route-pageId="">@pageGroup.PageGroupTitle</a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+        <li>
+            <a title="درباره ما" asp-page="About">درباره ما</a>
+        </li>
+        <li>
+            <a title="تماس با ما" asp-page="ContactUs">تماس با ما</a>
+        </li>
+    </ul>
+</nav>

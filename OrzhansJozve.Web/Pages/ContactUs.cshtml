@@ -1,0 +1,141 @@
+﻿@page "/contactus"
+@model ContactUsModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    ViewData["Title"] = "تماس با ما";
+}
+
+@if (Model.Message != null)
+{
+    <div>
+        <div class="showsuccess" title="@Model.Message"><div class="bginfo actionIcon addbtnaction"> <i class="fa fa-check actionIcon2"></i>@Model.Message</div></div>
+    </div>
+}
+@if (Model.reCAPTCHAMessage != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bg-danger actionIcon addbtnaction"> <i class="fa fa-robot actionIcon2"></i>@Model.reCAPTCHAMessage</div></div>
+    </div>
+}
+<!-- Contact Page Area Start Here -->
+<section class="contact-page-wrap-layout1">
+    <div class="container">
+        <div class="contact-page-box-layout1">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-list">
+                        <div class="heading-layout5 mg-b-30">
+                            <h2 title="اطلاعات">اطلاعات</h2>
+                        </div>
+                        <div class="media">
+                            <div class="item-icon">
+                                <i class="flaticon-call-answer" title="تلفن"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="item-title" title="تلفن">تلفن</h5>
+                                <ul>
+                                    <li><a title="تلفن: 09382560424" href="tel:09382560424" class="text-decoration-none">تلفن: 09382560424</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="item-icon">
+                                <i class="flaticon-maps-and-flags" title="آدرس"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="item-title" title="آدرس">آدرس</h5>
+                                <ul>
+                                    <li><a title="پونک دانشکده هاشمی رفسنجانی تهران مرکز" href="https://goo.gl/maps/HD4Y2ZwQjVmxz26g6" class="text-decoration-none">پونک دانشکده هاشمی رفسنجانی تهران مرکز</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="item-icon">
+                                <i class="flaticon-mail" title="ایمیل"></i>
+                            </div>
+                            <div class="media-body">
+                                <h5 title="ایمیل" class="item-title">ایمیل</h5>
+                                <ul>
+                                    <li><a title="orzhansjozve@gmail.com" href="mailto:orzhansjozve@gmail.com" class="text-decoration-none">orzhansjozve@gmail.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-form-box-layout1">
+                        <div class="heading-layout5 mg-b-30">
+                            <h2 title="صحبت کردن با ما">صحبت کردن با ما</h2>
+                        </div>
+                        <form class="contact-form-box" id="contact-form" method="post" asp-page-handler="UploadUserComment">
+                            <input type="hidden" name="captcha" id="captchaInput" value="" />
+                            <div class="row gutters-15">
+                                <div class="col-lg-6 col-12 form-group">
+                                    <label title="نام">نام *</label>
+                                    <input title="نام خود را وارد کنید" type="text" placeholder="" class="form-control bg-white background-shadow" name="name" data-error="فیلد نام مورد نیاز است" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-lg-6 col-12 form-group">
+                                    <label title="ایمیل">ایمیل *</label>
+                                    <input title="ایمیل خود را وارد کنید" type="email" placeholder="" class="form-control bg-white background-shadow" name="email" data-error="فیلد ایمیل مورد نیاز است" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-md-6 col-12 form-group">
+                                    <label title="تلفن">تلفن *</label>
+                                    <input title="تلفن خود را وارد کنید" type="text" placeholder="" class="form-control bg-white background-shadow" name="phone" data-error="فیلد تلفن مورد نیاز است" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-md-6 col-12 form-group">
+                                    <label title="موضوع">موضوع *</label>
+                                    <input title="موضوع خود را وارد کنید" type="text" placeholder="" class="form-control bg-white background-shadow" name="subject" data-error="فیلد موضوع مورد نیاز است" required>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label title="نظر">نظر خود را تایپ کنید *</label>
+                                    <textarea title="نظر خود را وارد کنید" placeholder="" class="textarea form-control bg-white background-shadow" name="message" id="form-message" rows="5" cols="20"
+                                              data-error="فیلد پیام مورد نیاز است" required></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <button title="تایید" asp-page-handler="UploadUserComment" type="submit" class="btn-fill-3 gradient-accent background-shadow">تایید<i class="fas fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-response"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Page Area End Here -->
+@section meta{
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="@Model.GetUri()" />
+    @*open graph*@
+    <meta property="og:title" content="اورژانس جزوه" />
+    <meta property="og:description" content="شما در هر زمان و مکان میتوانید با اورژانس جزوه با شماره 09382560424 ارتباط برقرار کنید. " />
+    <meta property="og:image" content="https://orzhansjozve.ir/images/orzhansjozve-dark-logo.webp" />
+    <meta property="og:image:url" content="https://orzhansjozve.ir/images/orzhansjozve-light-logo.webp" />
+    <meta property="og:url" content="@Model.MainSite" />
+    <meta property="og:site_name" content="اورژانس جزوه" />
+    <meta property="og:region" content="Tehran" />
+    <meta property="og:country-name" content="Iran" />
+    <!--keyword-->
+    <meta name=keywords content="اورژانس جزوه,اخبار دانشجویی,مقالات دانشجویی,زندگی دانشجویی,فرهنگ دانشجویی,دغدغه دانشجویان,ارتباط با اورژانش جزوه,تماس با اورژانس جزوه,آدرس اورژانس جزوه,ایمیل اورژانس جزوه">
+    <!--Twitter-->
+    <meta name="twitter:title" content="اورژانس جزوه">
+    <meta name="twitter:description" content="اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است.">
+    <meta name="twitter:image" content="https://dl.sepantab.ir/OrzhansJozve/MainImages/sepantab-dark-logo.png">
+    <meta name="twitter:site" content="@($"@orzhansjozve")">
+}
+@section Scripts{
+    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {
+            $("#captchaInput").val(token);
+        });
+    });
+    </script>
+}

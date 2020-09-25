@@ -1,0 +1,4 @@
+﻿User-agent: *
+Disallow: /admin/
+Allow: /
+Sitemap: https://orzhansjozve.ir/sitemap.xml

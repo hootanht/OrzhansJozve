@@ -1,0 +1,24 @@
+﻿@page "/a/{key}"
+@model ArticelShortLinkModel
+@{
+    ViewData["Title"] = "ArticelShortLink";
+    string mainSite = "https://orzhansjozve.ir";
+}
+
+@section meta{
+    @*open graph*@
+    <meta property="og:title" content="@Model.PageModel.PageTitle" />
+    <meta property="og:description" content="@Model.PageModel.PageShortDiscription" />
+    <meta property="og:image" content="@mainSite/Blog-Content/Articel-Images/@Model.PageModel.PageImageUrl" />
+    <meta property="og:image:url" content="@mainSite/Blog-Content/Articel-Images/@Model.PageModel.PageImageUrl" />
+    <meta property="og:url" content="@Model.GraphUri.ToString()" />
+    <meta property="og:site_name" content="اورژانس جزوه" />
+    <meta property="og:region" content="Tehran" />
+    <meta property="og:country-name" content="Iran" />
+    <!--Twitter-->
+    <meta name="twitter:title" content="@Model.PageModel.PageTitle">
+    <meta name="twitter:description" content="@Model.PageModel.PageShortDiscription">
+    <meta name="twitter:image" content="@mainSite/Blog-Content/Articel-Images/@Model.PageModel.PageImageUrl">
+    <meta name="twitter:site" content="@($"@orzhansjozve")">
+}
+

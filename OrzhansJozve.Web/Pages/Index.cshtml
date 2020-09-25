@@ -1,0 +1,257 @@
+﻿@page "/{handler?}/{pageId?}"
+@model IndexModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+
+}
+@inject OrzhansJozve.DataLayer.Repositories.IPageRepository _pageService
+@inject OrzhansJozve.DataLayer.Repositories.IPageGroupRepository _pageGroupService
+@inject OrzhansJozve.DataLayer.Repositories.IAuthorRepository _authorService
+@inject OrzhansJozve.DataLayer.Repositories.ICommentRepository _commentService
+@inject OrzhansJozve.DataLayer.Repositories.IAdsRepository _iadsRepository
+@using OrzhansJozve.Utilities
+<!-- Header Area End Here -->
+@if (Model.Message != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bginfo actionIcon addbtnaction" title="@Model.Message"> <i class="fa fa-check actionIcon2"></i>@Model.Message</div></div>
+    </div>
+}
+@if (Model.reCAPTCHAMessage != null)
+{
+    <div>
+        <div class="showsuccess"><div class="bg-danger actionIcon addbtnaction"> <i class="fa fa-robot actionIcon2"></i>@Model.reCAPTCHAMessage</div></div>
+    </div>
+}
+<!-- Inne Page Banner Area Start Here -->
+<section class="fix">
+    <div id="particles-js">
+    </div>
+    <div class="text-center bg-top">
+        <h1 class="text-white mag-header p-5 p-lg-0" title="اورژانس جزوه">
+            " اورژانس جزوه انعکاس دهنده <br> <br>  اخبار و اتفاقات دنیای دانشجویی " <br>
+        </h1>
+        <div class="text-center">
+            <div class="text-center myRow col-12 mt-5">
+                <div class="col-4" title="اخبار">
+                    <div class="far fa-file-alt text-white iconfont"></div>
+                    <div class="text-white mt-4 iconTextFont">اخبار</div>
+                    <div class="text-white mt-4 iconTextFont">@_pageService.GetAllPageAcceptNumber()</div>
+                </div>
+                <div class="col-4" title="بازدید">
+                    <div class="fas fa-eye text-white iconfont"></div>
+                    <div class="text-white mt-4 iconTextFont">بازدید</div>
+                    <div class="text-white mt-4 iconTextFont">@((_pageService.GetAllPageViewer()).ToKNumber())</div>
+                </div>
+                <div class="col-4" title="نویسندگان">
+                    <div class="far fa-address-card text-white iconfont"></div>
+                    <div class="text-white mt-4 iconTextFont">نویسندگان</div>
+                    <div class="text-white mt-4 iconTextFont">@_authorService.GetAllAuthorNumber()</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- Inne Page Banner Area End Here -->
+<!-- Blog Area Start Here -->
+<section class="blog-wrap-layout5">
+    @if (_iadsRepository.TopAdsExist())
+    {
+        @await Component.InvokeAsync("TopAdsComponent")
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="row">
+                    @if (Model.Pages.Count != 0)
+                    {
+                        @foreach (var item in Model.Pages)
+                        {
+                            <div class="col-xl-6 col-lg-12 col-md-6 col-12">
+                                <div class="blog-box-layout7">
+                                    <div class="item-img background-shadow rounded-top">
+                                        <a title="@item.PageTitle" asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()"><img loading="lazy" class="articel-img rounded-top" src="~/Blog-Content/Articel-Images/@item.PageSecondImageUrl" alt="@item.PageTitle" title="@item.PageTitle"></a>
+                                    </div>
+                                    <div class="item-content">
+                                        <a title="@_pageGroupService.SelectById(item.PageGroupId).PageGroupTitle" asp-page="Index" asp-page-handler="PageGroup" asp-route-query="@_pageGroupService.SelectById(item.PageGroupId).PageGroupTitle" class="text-decoration-none"><div class="item-category gradient-accent">@_pageGroupService.SelectById(item.PageGroupId).PageGroupTitle</div></a>
+                                        <h3 class="item-title text-justify title-line">
+                                            <a title="@item.PageTitle" asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()">
+                                                @item.PageTitle
+                                            </a>
+                                        </h3>
+                                        <ul class="entry-meta">
+                                            <li title="نویسنده : @_authorService.SelectById(item.AuthorId).AuthorName"><i class="far fa-user-circle"></i><a class="text-decoration-none author-color" asp-page="ArticelSearch" asp-route-s="@_authorService.SelectById(item.AuthorId).AuthorName.Replace(" ","-")">@_authorService.SelectById(item.AuthorId).AuthorName</a></li>
+                                            <li title="تاریخ انتشار : @item.PageCreateDate.ToShamsi()"><i class="far fa-clock"></i><a class="text-decoration-none author-color" asp-page="ArticelSearch" asp-route-s="@item.PageCreateDate.ToShamsi().Replace(" ","-")">@item.PageCreateDate.ToShamsi()</a></li>
+                                        </ul>
+                                        <p class="text-justify small-des-line" title="@item.PageShortDiscription">
+                                            @item.PageShortDiscription
+                                        </p>
+                                        <div class="action-area">
+                                            <a title="ادامه مطلب" asp-page="ArticelPage" asp-route-pageId="@item.PageId" asp-route-title="@item.PageTitle.Trim().Replace(" ", "-").ToString()" class="item-btn">
+                                                ادامه مطلب<i class="fas fa-arrow-circle-right"></i>
+                                            </a>
+                                            <div>
+                                                <span class="item-comment ml-5" title="نظرات">
+                                                    <i class="far fa-comment-dots"></i>@_commentService.GetAllCommentByPageNumber(item.PageId).ToKNumber()
+                                                </span>
+                                                <span class="item-comment" title="تعداد بازدید"><i class="far fa-eye"></i>@((item.PageView.ToKNumber()))</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center mt-5 w-100"><h2 title="هیچ اخباری با این عنوان یافت نشد">هیچ اخباری با این عنوان یافت نشد</h2></div>
+                    }
+                </div>
+                <div class="pagination-layout1">
+                    @if (Model.Pages.Count != 0)
+                    {
+                        <div class="text-center">
+                            <nav>
+                                <ul class="pagination d-inline-block">
+                                    @if (((int)ViewData["PageID"]) != 1)
+                                    {
+                                        if (ViewData["Handler"].ToString() == "Page")
+                                        {
+                                            <li class="" title="صفحه‌ی قبل"><a aria-label="Previous" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@((int)ViewData["PageID"] - 1)"><span aria-hidden="true">«</span></a></li>
+                                        }
+                                        else if (ViewData["Handler"].ToString() == "search")
+                                        {
+                                            <li class="" title="صفحه‌ی قبل"><a aria-label="Previous" href="@($"/{ViewData["Handler"]}/{ViewData["Query"]}/{(int)ViewData["PageID"] - 1}")"><span aria-hidden="true">«</span></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="" title="صفحه‌ی قبل"><a aria-label="Previous" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@((int)ViewData["PageID"] - 1)" asp-route-query="@ViewData["Query"]"><span aria-hidden="true">«</span></a></li>
+                                        }
+                                    }
+                                    @if (((int)ViewData["PageID"] > 3))
+                                    {
+                                        @for (int i = ((int)ViewData["PageID"]) - 2; i <= ((int)ViewData["PageCount"]); i++)
+                                        {
+                                            if (ViewData["Handler"].ToString() == "Page")
+                                            {
+                                                <li><a class="@(((int)ViewData["PageID"]==i)?"active background-shadow":"")" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@i">@i<span class="sr-only">(current)</span></a></li>
+                                            }
+                                            else if (ViewData["Handler"].ToString() == "search")
+                                            {
+                                                <li><a class="@(((int)ViewData["PageID"]==i)?"active background-shadow":"")" href="@($"/{ViewData["Handler"]}/{ViewData["Query"]}/{i}")">@i<span class="sr-only">(current)</span></a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="@(((int)ViewData["PageID"]==i)?"active background-shadow":"")" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@i" asp-route-query="@ViewData["Query"]">@i<span class="sr-only">(current)</span></a></li>
+                                            }
+                                            @if (i == ((int)ViewData["PageID"]) + 2)
+                                            {
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @for (int i = 1; i <= ((int)ViewData["PageCount"]); i++)
+                                        {
+                                            if (ViewData["Handler"].ToString() == "Page")
+                                            {
+                                                <li><a class="@(((int)ViewData["PageID"]==i)?"active background-shadow":"")" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@i">@i<span class="sr-only">(current)</span></a></li>
+                                            }
+                                            else if (ViewData["Handler"].ToString() == "search")
+                                            {
+                                                <li><a class="@(((int)ViewData["PageID"]==i)?"active background-shadow":"")" href="@($"/{ViewData["Handler"]}/{ViewData["Query"]}/{i}")">@i<span class="sr-only">(current)</span></a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="@(((int)ViewData["PageID"]==i)?"active background-shadow":"")" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@i" asp-route-query="@ViewData["Query"]">@i<span class="sr-only">(current)</span></a></li>
+                                            }
+                                            @if (i == ((int)ViewData["PageID"]) + 4)
+                                            {
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    @if (((int)ViewData["PageID"]) != ((int)ViewData["PageCount"]))
+                                    {
+                                        if (ViewData["Handler"].ToString() == "Page")
+                                        {
+                                            <li title="صفحه‌ی بعد"><a aria-label="Next" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@((int)ViewData["PageID"] + 1)"><span aria-hidden="true">»</span></a></li>
+                                        }
+                                        else if (ViewData["Handler"].ToString() == "search")
+                                        {
+                                            <li title="صفحه‌ی بعد"><a aria-label="Next" href="@($"/{ViewData["Handler"]}/{ViewData["Query"]}/{(int)ViewData["PageID"] + 1}")"><span aria-hidden="true">»</span></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li title="صفحه‌ی بعد"><a aria-label="Next" asp-page-handler="@ViewData["Handler"]" asp-route-pageId="@((int)ViewData["PageID"] + 1)" asp-route-query="@ViewData["Query"]"><span aria-hidden="true">»</span></a></li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4 col-12 sidebar-widget-area sidebar-break-md">
+                <div class="widget widget-search-box rounded-lg">
+                    <form method="get" asp-page="ArticelSearch" asp-page-handler="Search">
+                        <div class="input-group stylish-input-group p-0 pr-3">
+                            <input title="جست و جو" type="text" name="s" class="form-control" placeholder="جستجو در اینجا . . .">
+                            <span class="input-group-addon">
+                                <button title="جست و جو کن" type="submit" class="p-3 ml-1" asp-page="ArticelSearch" asp-page-handler="Search">
+                                    <span class="flaticon-magnifying-glass" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <partial name="MostVisitedPageGroupPartial" />
+                <partial name="LatestArticelPartial" />
+                <partial name="TopArticelPartial" />
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Area End Here -->
+@if (_iadsRepository.DownAdsExist())
+{
+    @await Component.InvokeAsync("DownAdsComponent")
+}
+@section Scripts{
+    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {
+            $("#captchaInput").val(token);
+        });
+    });
+    </script>
+}
+@section meta{
+    <link rel="canonical" href="@Model.GetUri()" />
+    <meta name="description" content="اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است.">
+    <meta name="robots" content="index,follow">
+    @*open graph*@
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="اورژانس جزوه" />
+    <meta property="og:description" content="اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است." />
+    <meta property="og:image" content="https://orzhansjozve.ir/images/orzhansjozve-dark-logo.webp" />
+    <meta property="og:image:url" content="https://orzhansjozve.ir/images/orzhansjozve-light-logo.webp" />
+    <meta property="og:url" content="@Model.GetUri()" />
+    <meta property="og:site_name" content="اورژانس جزوه" />
+    <meta property="og:region" content="Tehran" />
+    <meta property="og:country-name" content="Iran" />
+    <!--keyword-->
+    <meta name=keywords content="اورژانس جزوه,اخبار دانشجویی,مقالات دانشجویی,زندگی دانشجویی,فرهنگ دانشجویی,دغدغه دانشجویان,اخبار دانشگاه تهران مرکز,پایگاه اطلاع رسانی دانشجویی">
+    <!--Twitter-->
+    <meta name="twitter:title" content="اورژانس جزوه">
+    <meta name="twitter:description" content="اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است.">
+    <meta name="twitter:image" content="https://orzhansjozve.ir/images/orzhansjozve-dark-logo.webp">
+    <meta name="twitter:site" content="@($"@orzhansjozve")">
+}
+@section SearchGoogleAnalitics{
+    ga('send', 'pageview', '@($"/Search?s={ViewData["Query"]}")');
+}

@@ -1,0 +1,39 @@
+﻿@page "/admin/addfooterlink"
+@model AdminAddFooterLinkModel
+@{
+    ViewData["Title"] = "افزودن لینک فوتر سایت";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Add AddFooter -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>افزودن لینک فوتر سایت جدید</h3> </header>
+    <ul>
+        <li>
+            <form method="post" enctype="multipart/form-data" class="form-group" id="AddNewAds">
+                <label asp-for="FooterLinkModel.FooterLinkTitle"></label>
+                <input asp-for="FooterLinkModel.FooterLinkTitle" class="form-control" />
+                <span asp-validation-for="FooterLinkModel.FooterLinkTitle" class="text-danger displayblock"></span>
+                <label asp-for="FooterLinkModel.FooterLinkUrl" class="margin-top-20"></label>
+                <input asp-for="FooterLinkModel.FooterLinkUrl" class="form-control" />
+                <span asp-validation-for="FooterLinkModel.FooterLinkUrl" class="text-danger displayblock"></span>
+                <label asp-for="FooterLinkModel.FooterLinkUrlRel" class="margin-top-20"></label>
+                <select asp-for="FooterLinkModel.FooterLinkUrlRel" class="form-control increaseheigh">
+                    <option value="nofollow">nofollow</option>
+                    <option value="follow">follow</option>
+                </select>
+                <span asp-validation-for="FooterLinkModel.FooterLinkUrlRel" class="text-danger displayblock"></span>
+                <label asp-for="FooterLinkModel.FooterLinkColumn" class="margin-top-20"></label>
+                <select asp-for="FooterLinkModel.FooterLinkColumn" class="form-control increaseheigh">
+                    <option value="1">ستون اول</option>
+                    <option value="2">ستون دوم</option>
+                </select>
+                <span asp-validation-for="FooterLinkModel.FooterLinkColumn" class="text-danger displayblock"></span>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="AddFooterLink" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End AddFooter -->

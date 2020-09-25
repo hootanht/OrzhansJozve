@@ -1,0 +1,40 @@
+﻿@page "/admin/editcomment/{id}"
+@model AdminEditCommentModel
+@{
+    ViewData["Title"] = "ویرایش نظر";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- EditPageGroup -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>ویرایش نظر</h3> </header>
+    <ul>
+        <li>
+            <form method="post" class="form-group" id="AddNewArticel">
+                <label asp-for="CommentModel.CommentAuthorName"></label>
+                <input asp-for="CommentModel.CommentAuthorName" class="form-control" />
+                <span asp-validation-for="CommentModel.CommentAuthorName" class="text-danger displayblock"></span>
+                <label asp-for="CommentModel.CommentAuthorEmail" class="margin-top-20"></label>
+                <input asp-for="CommentModel.CommentAuthorEmail" class="form-control" />
+                <span asp-validation-for="CommentModel.CommentAuthorEmail" class="text-danger displayblock"></span>
+                <label asp-for="CommentModel.CommentAuthorWebsite" class="margin-top-20"></label>
+                <input asp-for="CommentModel.CommentAuthorWebsite" class="form-control" />
+                <span asp-validation-for="CommentModel.CommentAuthorWebsite" class="text-danger displayblock"></span>
+                <label asp-for="CommentModel.CommentAuthorText" class="margin-top-20"></label>
+                <input asp-for="CommentModel.CommentAuthorText" class="form-control" />
+                <span asp-validation-for="CommentModel.CommentAuthorText" class="text-danger displayblock"></span>
+                <label asp-for="CommentModel.CommentIsAccept" class="margin-top-20"></label>
+                <select asp-for="CommentModel.CommentIsAccept" class="form-control increaseheigh margin-top-20">
+                    <option value="true">بله</option>
+                    <option selected value="false">خیر</option>
+                </select>
+                <span asp-validation-for="CommentModel.CommentIsAccept" class="text-danger displayblock"></span>
+                <input asp-for="CommentModel.PageId" class="form-control" type="hidden" />
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="EditComment" name="AddNewArticel" value="AddNewArticel" type="submit" class="bgwarning actionIcon articelactionicon"> <i class="fa fa-edit actionIcon2"></i>ویرایش شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End EditPageGroup -->

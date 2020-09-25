@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<div class="footer-box-layout1 text-center">
+    <div class="footer-title">
+        <h3 title="عضویت در خبرگزاری" class="text-right">عضویت در خبرگزاری</h3>
+    </div>
+    <div class="footer-form-box">
+        <form class="contact-form-box" asp-page-handler="AddNewsAgencyPeople" method="post">
+            <input type="hidden" name="captcha" id="captchaInput" value="" />
+            <div class="row">
+                <div class="col-12 form-group">
+                    <input title="ایمیل خود را وارد کنید" type="email" placeholder="ایمیل شما *" class="form-control"
+                           name="email" data-error="فیلد ایمیل مورد نیاز است" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="col-12 form-group">
+                    <button asp-page-handler="AddNewsAgencyPeople" title="عضویت در خبرنامه" type="submit" class="fw-btn-fill bg-white text-accent">
+                        عضویت در
+                        خبرگزاری<i class="fas fa-arrow-circle-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-response"></div>
+        </form>
+    </div>
+</div>

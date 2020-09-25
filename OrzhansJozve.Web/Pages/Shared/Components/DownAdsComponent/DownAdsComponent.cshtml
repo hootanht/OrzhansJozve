@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<OrzhansJozve.DomainClass.Domain.Ads>
+@{
+}
+<div class="container">
+    <h2 title="نیاز های دانشجویی" class="mortabet text-center text-md-right"> نیاز های دانشجویی</h2>
+    <div class="row">
+        @foreach (var item in Model.ToList())
+        {
+            <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                <div class="service-box-layout9">
+                    <div class="item-img background-shadow">
+                        <a href="@item.AdsUrl" target="_blank" rel="nofollow"><img loading="lazy" src="~/Blog-Content/Ads-Images/@item.AdsImageName" alt="@item.AdsTitle" class="ads-img"></a>
+                    </div>
+                    <div class="item-content pt-0 text-center">
+                        <h3 class="item-title similar-articel-font"><a href="@item.AdsUrl" target="_blank" rel="nofollow">@item.AdsTitle </a></h3>
+                        <a class="text-decoration-none similar-articel-subtitle text-black-50" target="_blank" href="@item.AdsUrl" rel="nofollow"><div class="item-subtitle similar-articel-subtitle-div background-shadow"><span>لینک ورود</span></div></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

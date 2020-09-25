@@ -1,0 +1,33 @@
+﻿@page
+@model NewsAgencyEmailModel
+@{
+    ViewData["Title"] = "خبرگزاری اورژانس جزوه";
+}
+
+<!-- NewsAgency -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i><h3>ایمیل خبرگزاری</h3></header>
+    <ul>
+        <li>
+            <form method="post" class="form-group" id="AddNewArticel">
+                <label>عنوان ایمیل خبرگزاری</label>
+                <input name="emailsubject" type="text" required placeholder="عنوان ایمیل را وارد کنید" class="form-control margin-top-20" />
+                <label class="margin-top-20">متن ایمیل خبرگزاری</label>
+                <textarea class="form-control margin-top-20" placeholder="متن ایمیل را وارد کنید" name="emailtext" id="emailContent" rows="5"></textarea>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="SendEmail" name="AddNewArticel" value="AddNewArticel" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-send actionIcon2"></i>ارسال ایمیل</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End NewsAgency -->
+@section Scripts{
+    <script src="~/lib/CKEditor_HTML/ckeditor/ckeditor.js"></script>
+    <script src="~/lib/CKEditor_HTML/ckeditor/adapters/jquery.js"></script>
+    <script>
+        $(function () {
+            $('#emailContent').ckeditor();
+        });
+    </script>
+}

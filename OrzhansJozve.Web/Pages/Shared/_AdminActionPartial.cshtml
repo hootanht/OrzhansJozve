@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@inject OrzhansJozve.DataLayer.Repositories.IMasterPageRepository _masterPageRepository
+@inject OrzhansJozve.DataLayer.Repositories.IPageGroupRepository _pageGroupRepository
+@inject OrzhansJozve.DataLayer.Repositories.IPageRepository _pageRepository
+@inject OrzhansJozve.DataLayer.Repositories.ICommentRepository _commentRepository
+@inject OrzhansJozve.DataLayer.Repositories.IAuthorRepository _authorRepository
+@inject OrzhansJozve.DataLayer.Repositories.IAdsRepository _iadsRepository
+@inject OrzhansJozve.DataLayer.Repositories.IInsideAticelImageRepository _insideArticelImageRepository
+@inject OrzhansJozve.DataLayer.Repositories.IFooterLinkRepository _footerLinkRepository
+@{
+}
+<section class="category-section border-radius">
+    <header><i class="fa fa-folder-open-o"></i> <h3> دسته بندی ها </h3></header>
+    <ul>
+        <li><a href="/admin/articel"> اخبار  <span>@_pageRepository.GetAllPageAcceptNumber()</span></a></li>
+        <li><a href="/admin/articelaccept"> اخبار در دست انتشار  <span>@_pageRepository.GetAllPageNotAcceptNumber()</span></a></li>
+        <li><a href="/admin/mastergroup"> سرگروه ها  <span>@_masterPageRepository.GetAllMasterPageGroupNumber()</span></a></li>
+        <li><a href="/admin/pagegroup"> گروه ها  <span>@_pageGroupRepository.GetAllPageGroupNumber()</span></a></li>
+        <li><a href="/admin/comment"> نظرات  <span>@_commentRepository.GetAllCommentIsAcceptNumber()</span></a></li>
+        <li><a href="/admin/commentaccept"> نظرات در دست برسی  <span>@_commentRepository.GetAllCommentNotAcceptNumber()</span></a></li>
+        <li><a href="/admin/author"> نویسندگان  <span>@_authorRepository.GetAllAuthorNumber()</span></a></li>
+        <li><a href="/admin/ads"> تبلیغات  <span>@_iadsRepository.SelectAllAdsCount()</span></a></li>
+        <li><a href="/admin/insideaticelimage"> تصاویر اخبار  <span>@_insideArticelImageRepository.AllInsideAticelImageCount()</span></a></li>
+        <li><a href="/admin/footerlink"> لینک های فوتر سایت  <span>@_footerLinkRepository.AllFooterLinksCount()</span></a></li>
+    </ul>
+</section>

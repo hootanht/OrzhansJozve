@@ -1,0 +1,35 @@
+﻿@page "/admin/addpagegroup"
+@model AdminAddPageGroupModel
+@{
+    ViewData["Title"] = "افزودن گروه جدید";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- AddPageGroup -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>افزودن گروه جدید</h3> </header>
+    <ul>
+        <li>
+            <form method="post" class="form-group" id="AddNewArticel">
+                <label asp-for="PageGroupModel.PageGroupTitle"></label>
+                <input asp-for="PageGroupModel.PageGroupTitle" class="form-control" />
+                <span asp-validation-for="PageGroupModel.PageGroupTitle" class="text-danger displayblock"></span>
+                <label asp-for="PageGroupModel.PageGroupShowInMenuNumber" class="margin-top-20"></label>
+                <input asp-for="PageGroupModel.PageGroupShowInMenuNumber" class="form-control" />
+                <span asp-validation-for="PageGroupModel.PageGroupShowInMenuNumber" class="text-danger displayblock"></span>
+                <label asp-for="PageGroupModel.MasterPageGroup.MasterPageGroupTitle" class="margin-top-20"></label>
+                <select asp-for="PageGroupModel.MasterPageGroupId" class="form-control increaseheigh">
+                    @foreach (var item in Model.MasterPageGroupList)
+                    {
+                        <option value="@item.MasterPageGroupId">@item.MasterPageGroupTitle</option>
+                    }
+                </select>
+                <span asp-validation-for="PageGroupModel.MasterPageGroupId" class="text-danger displayblock"></span>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="AddPageGroup" name="AddNewArticel" value="AddNewArticel" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End AddPageGroup -->

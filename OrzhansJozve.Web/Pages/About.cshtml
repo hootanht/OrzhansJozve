@@ -1,0 +1,153 @@
+﻿@page "/aboutus"
+@model AboutModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    ViewData["Title"] = "درباره ما";
+}
+@inject OrzhansJozve.DataLayer.Repositories.IPageRepository _pageService
+@if (Model.Message != null)
+{
+<div>
+    <div class="showsuccess"><div class="bginfo actionIcon addbtnaction"> <i class="fa fa-check actionIcon2"></i>@Model.Message</div></div>
+</div>
+}
+<!-- Service Area Start Here -->
+<section class="service-wrap-layout6">
+    <div class="container-fluid">
+        <div class="service-box-layout8">
+            <div class="single-item service-item-right">
+                <div class="item-img">
+                    <img loading="lazy" src="~/images/service/service1.png" alt="تیم اورژانس جزوه" title="تیم اورژانس جزوه">
+                </div>
+            </div>
+            <div class="single-item service-item-left">
+                <div class="item-content">
+                    <h2 class="item-title" title="ما کی هستیم">ما کی هستیم</h2>
+                    <p>
+                        اورژانس جزوه کادری از دانشجویانی است که طی روزهای متوالی کنار هم روزمرگی ها و مشکلات دانشجویی را رصد می کنند و اطلاعات و اخبار داغ دنیای دانشجویی را به اطلاع شما می رساند.با ما همیشه یک قدم جلوترید.
+                    </p>
+                    <ul class="service-list">
+                        <li title="اطلاعات روز دنیای دانشجویی">اطلاعات روز دنیای دانشجویی</li>
+                        <li title="حمایت دانشجویان در تمام زمینه ها">حمایت دانشجویان در تمام زمینه ها</li>
+                        <li title="حضور بهترین ها در تمام رشته ها برای حمایت از شما">حضور بهترین ها در تمام رشته ها برای حمایت از شما</li>
+                    </ul>
+                    <a href="tel:09382560424" class="ghost-btn-2 text-accent border-accent" title="تماس با اورژانس جزوه">تماس با ما<i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Service Area End Here -->
+<!-- Why Choose Area Start Here -->
+<section class="why-chose-wrap-layout3">
+    <div class="container-fluid">
+        <div class="why-chose-box-layout5">
+            <div class="single-item single-item-left">
+                <div class="item-img">
+                    <img loading="lazy" src="~/images/figure/figure4.png" alt="تیم اورژانس جزوه">
+                </div>
+            </div>
+            <div class="single-item single-item-right">
+                <div class="item-content">
+                    <div class="item-subtitle" title="اورژانس جزوه شما را از هر سامانه ای دیگر بی نیاز میکند">اورژانس جزوه شما را از هر سامانه ای دیگر بی نیاز میکند</div>
+                    <h2 class="item-title" title="چرا کاربران از اورژانس جزوه استفاده میکنند؟">چرا کاربران از اورژانس جزوه استفاده میکنند؟</h2>
+                    <p>
+                        در این زمان که رسانه های اجتماعی با کندی و مشکلاتی همراه هستند وجود یک سایت حرفه ای دانشجویی که بتواند دانشجویان را در تمام زمینه ها حمایت کند و تمام نیازمندی های دانشجویان را برطرف کند الزامی میباشد.
+                        به همین منظور ما گرد هم جمع شدیم تا در کنار شما بهترین هارا ارائه دهیم. شما لایق بهترین ها هستید.
+                    </p>
+                    <div class="counter-box">
+                        <div class="single-count">
+                            <div class="counter count-number" title="@((_pageService.GetAllPageViewer()))" data-num="@((_pageService.GetAllPageViewer()))">@((_pageService.GetAllPageViewer()))</div>
+                            <div class="count-title" title="بازدید کنندگان">بازدید کنندگان</div>
+                        </div>
+                        <div class="single-count">
+                            <div class="counter count-number" title="@_pageService.GetAllPageAcceptNumber()" data-num="@_pageService.GetAllPageAcceptNumber()">@_pageService.GetAllPageAcceptNumber()</div>
+                            <div class="count-title" title="اخبار">اخبار</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Why Choose Area End Here -->
+<!-- Contact Info Area Start Here -->
+<section class="contact-info-wrap-layout1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-12">
+                <div class="contact-info-box-layout1">
+                    <div class="media media-none--md">
+                        <div class="item-icon">
+                            <i class="flaticon-call-answer"></i>
+                        </div>
+                        <div class="media-body space-md">
+                            <h3 class="item-title text-white" dir="ltr" title="(+98) 938 256 0424">(+98) 938 256 0424</h3>
+                            <div class="item-subtitle" title="شنبه تا جمعه: ساعت 8 صبح تا 8 شب">شنبه تا جمعه: ساعت 8 صبح تا 8 شب</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="contact-info-box-layout1">
+                    <div class="media media-none--md">
+                        <div class="item-icon">
+                            <i class="flaticon-mail"></i>
+                        </div>
+                        <div class="media-body space-md">
+                            <h3 class="item-title" title="orzhansjozve@gmail.com">orzhansjozve@gmail.com</h3>
+                            <div class="item-subtitle" title="همیشه منتظر ایمیل های شما هستیم">همیشه منتظر ایمیل های شما هستیم</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="contact-info-box-layout1">
+                    <div class="media media-none--md">
+                        <div class="item-icon">
+                            <i class="flaticon-maps-and-flags"></i>
+                        </div>
+                        <div class="media-body space-md">
+                            <h3 class="item-title" title="تهران">تهران</h3>
+                            <div class="item-subtitle" title="پونک دانشکده هاشمی رفسنجانی تهران مرکز">پونک دانشکده هاشمی رفسنجانی تهران مرکز</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Info Area End Here -->
+@section Scripts{
+    <script defer src="~/lib/jquery-admin/jquery.counterup.min.js"></script>
+    <script defer src="~/lib/waypoints/waypoints.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {
+            $("#captchaInput").val(token);
+        });
+    });
+    </script>
+}
+@section meta{
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="@Model.GetUri()" />
+    @*open graph*@
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="اورژانس جزوه" />
+    <meta property="og:description" content="اورژانس جزوه کادری از دانشجویانی است که طی روزهای متوالی کنار هم روزمرگی ها و مشکلات دانشجویی را رصد می کنند و اطلاعات و اخبار داغ دنیای دانشجویی را به اطلاع شما می رساند." />
+    <meta property="og:image" content="https://orzhansjozve.ir/images/orzhansjozve-dark-logo.webp" />
+    <meta property="og:image:url" content="https://orzhansjozve.ir/images/orzhansjozve-light-logo.webp" />
+    <meta property="og:url" content="@Model.GetUri()" />
+    <meta property="og:site_name" content="اورژانس جزوه" />
+    <meta property="og:region" content="Tehran" />
+    <meta property="og:country-name" content="Iran" />
+    <!--keyword-->
+    <meta name=keywords content="اورژانس جزوه,اخبار دانشجویی,مقالات دانشجویی,زندگی دانشجویی,فرهنگ دانشجویی,دغدغه دانشجویان,درباره اورژانس جزوه,درباره کادر اورژانس جزوه">
+    <!--Twitter-->
+    <meta name="twitter:title" content="اورژانس جزوه">
+    <meta name="twitter:description" content="اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است.">
+    <meta name="twitter:image" content="https://orzhansjozve.ir/images/orzhansjozve-dark-logo.webp">
+    <meta name="twitter:site" content="@($"@orzhansjozve")">
+}

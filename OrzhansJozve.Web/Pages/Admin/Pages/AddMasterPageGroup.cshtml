@@ -1,0 +1,27 @@
+﻿@page "/admin/addnewmasterpagegroup"
+@model AddMasterPageGroupModel
+@{
+    ViewData["Title"] = "افزودن سرگروه جدید";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<!-- AddNewMasterPageGroup -->
+<section class="last-news-section border-radius">
+    <header><i class="fa fa-book adminicon"></i>  <h3>افزودن سرگروه جدید</h3> </header>
+    <ul>
+        <li>
+            <form method="post" class="form-group" id="AddNewArticel">
+                <label asp-for="MasterPageGroupModel.MasterPageGroupTitle"></label>
+                <input asp-for="MasterPageGroupModel.MasterPageGroupTitle" class="form-control" />
+                <span asp-validation-for="MasterPageGroupModel.MasterPageGroupTitle" class="text-danger displayblock"></span>
+                <label asp-for="MasterPageGroupModel.ShowInMenuNumber" class="margin-top-20"></label>
+                <input asp-for="MasterPageGroupModel.ShowInMenuNumber" class="form-control" />
+                <span asp-validation-for="MasterPageGroupModel.ShowInMenuNumber" class="text-danger displayblock"></span>
+                <div class="row margin-top-20 centertext">
+                    <div class="col-xs-12 col-md-12"><button asp-page-handler="AddMasterPageGroup" name="AddNewArticel" value="AddNewArticel" type="submit" class="bggreen actionIcon articelactionicon"> <i class="fa fa-check actionIcon2"></i>منتشر شود</button></div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</section>
+<!-- End AddNewMasterPageGroup -->
