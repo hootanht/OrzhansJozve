@@ -121,7 +121,7 @@
 @section Scripts{
     <script defer src="~/lib/jquery-admin/jquery.counterup.min.js"></script>
     <script defer src="~/lib/waypoints/waypoints.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@(Configuration["googleReCaptcha:SiteKey"])&hl=fa"></script>
     <script>
     grecaptcha.ready(function() {
         grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {

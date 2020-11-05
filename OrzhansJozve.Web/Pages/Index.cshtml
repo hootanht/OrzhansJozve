@@ -220,16 +220,6 @@
 {
     @await Component.InvokeAsync("DownAdsComponent")
 }
-@section Scripts{
-    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
-    <script>
-    grecaptcha.ready(function() {
-        grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {
-            $("#captchaInput").val(token);
-        });
-    });
-    </script>
-}
 @section meta{
     <link rel="canonical" href="@Model.GetUri()" />
     <meta name="description" content="اورژانس جزوه بهترین در زمینه ی اخبار و اطلاعات و راه و روش دنیای شیرین دانشجویی می باشد که انتخاب هر دانشجویی برای آگاهی است.">

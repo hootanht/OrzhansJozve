@@ -38,13 +38,8 @@ namespace OrzhansJozve.Web.Pages
             ViewData["Title"] = Query;
         }
 
-        public async Task<IActionResult> OnPostAddNewsAgencyPeople(string email, string captcha)
+        public IActionResult OnPostAddNewsAgencyPeople(string email)
         {
-            if (!await _captchaValidator.IsCaptchaPassedAsync(captcha))
-            {
-                reCAPTCHAMessage = "شما به عنوان ربات شناخته شدید لطفا دوباره تلاش کنید";
-                return Redirect("/");
-            }
             return RedirectToPage("AddNewsAgencyPeople", new { email = email });
         }
 

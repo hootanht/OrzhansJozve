@@ -130,7 +130,7 @@
     <meta name="twitter:site" content="@($"@orzhansjozve")">
 }
 @section Scripts{
-    <script src="https://www.google.com/recaptcha/api.js?render=@Configuration["googleReCaptcha:SiteKey"]"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@(Configuration["googleReCaptcha:SiteKey"])&hl=fa"></script>
     <script>
     grecaptcha.ready(function() {
         grecaptcha.execute('@Configuration["googleReCaptcha:SiteKey"]', { action: 'contact' }).then(function (token) {

@@ -22,7 +22,7 @@ namespace OrzhansJozve.Web.Pages
             MainSite = "https://orzhansjozve.ir";
         }
 
-        
+
         public IActionResult OnPostAddNewsAgencyPeople(string email)
         {
             return RedirectToPage("AddNewsAgencyPeople", new { email = email });
