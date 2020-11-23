@@ -83,7 +83,7 @@ namespace OrzhansJozve.Web.Pages
                         using (var client = new SmtpClient("smtp.gmail.com"))
                         {
                             client.Port = 587;
-                            client.Credentials = new NetworkCredential("orzhansjozve@gmail.com", "orzhansJozve2020");
+                            client.Credentials = new NetworkCredential("orzhansjozve@gmail.com", "orzhansJozve2021");
                             client.EnableSsl = true;
                             //user
                             message.To.Add(new MailAddress(Comment.CommentAuthorEmail, Comment.CommentAuthorName));

@@ -18,7 +18,6 @@ namespace OrzhansJozve.DomainClass.Domain
         [Required(ErrorMessage = "لطفا توضیح کوتاه نویسنده را وارد کنید")]
         [Display(Name = "توضیح کوتاه نویسنده")]
         public string AuthorShortDescription { get; set; }
-        [Required(ErrorMessage = "لطفا تاریخ انتشار را وارد کنید")]
         [Display(Name = "تاریخ انتشار")]
         public DateTime AuthorCreateDate { get; set; }
         [Required(ErrorMessage = "لطفا تاریخ تولد نویسنده را وارد کنید")]

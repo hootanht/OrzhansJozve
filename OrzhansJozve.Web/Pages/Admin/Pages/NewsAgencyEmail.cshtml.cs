@@ -46,7 +46,7 @@ namespace OrzhansJozve.Web.Pages.Admin.Pages
                     using (var client = new SmtpClient("smtp.gmail.com"))
                     {
                         client.Port = 587;
-                        client.Credentials = new NetworkCredential("orzhansjozve@gmail.com", "orzhansJozve2020");
+                        client.Credentials = new NetworkCredential("orzhansjozve@gmail.com", "orzhansJozve2021");
                         client.EnableSsl = true;
                         await client.SendMailAsync(usermessage);
                     }
