@@ -34,9 +34,11 @@ namespace OrzhansJozve.Web.Pages.Admin.Pages
 
         public async Task<IActionResult> OnPostAddAuthor(IFormFile authorImage)
         {
-            if (ModelState.IsValid)
-            {
-                AuthorModel.AuthorCreateDate = DateTime.Now;
+            AuthorModel.AuthorCreateDate = DateTime.Now;
+            //TODO:ADD Model State
+            //if (ModelState.IsValid)
+            //{
+                
                 if (authorImage != null)
                 {
                     string path = "wwwroot/Blog-Content/Author-Images";
@@ -55,11 +57,11 @@ namespace OrzhansJozve.Web.Pages.Admin.Pages
                 _authorRepository.Save();
                 Message = "نویسنده با موفقیت منتشر شد";
                 return Redirect("/admin/author");
-            }
-            else
-            {
-                return Redirect("/error");
-            }
+            //}
+            //else
+            //{
+            //    return Redirect("/error");
+            //}
         }
     }
 }
