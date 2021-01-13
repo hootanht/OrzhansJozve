@@ -25,6 +25,7 @@ using OrzhansJozve.DataLayer.Services;
 using OrzhansJozve.Utilities;
 using OrzhansJozve.DataLayer.Context;
 using WebMarkupMin.AspNetCore3;
+using WebEssentials.AspNetCore.Pwa;
 
 namespace OrzhansJozve.Web
 {
