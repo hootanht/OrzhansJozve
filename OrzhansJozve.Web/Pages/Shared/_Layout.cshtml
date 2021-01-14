@@ -8,7 +8,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta name="language" content="fa" />
     <meta name="google-site-verification" content="tGHdrwag-dLezfHqy9BmppuE6G4wjGwAmQBI60ph4Ro" />
-    @RenderSection("meta", false)
+    @await RenderSectionAsync("meta", false)
     <title>@ViewData["Title"] - اورژانس جزوه</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="msvalidate.01" content="9F86ECB78531253BFEF484610CB1569B" />
@@ -206,19 +206,19 @@
         })(window, document, "clarity", "script", "3x0pq67fi3");
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163122730-1"></script>
-    <script defer>
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-163122730-1"></script>
+    <script defer async>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            @RenderSection("SearchGoogleAnalitics",false)
             gtag('config', 'UA-163122730-1');
+            @await RenderSectionAsync("SearchGoogleAnalitics",false)
     </script>
     <!--End Google Analytics-->
     <environment names="Staging,Production">
         <script defer async asp-append-version="true" src="~/js/site.min.js"></script>
     </environment>
-    @RenderSection("Scripts", false)
+    @await RenderSectionAsync("Scripts", false)
     <!-- Main js -->
     <environment names="Development">
         <script defer asp-append-version="true" src="~/js/main.js"></script>
