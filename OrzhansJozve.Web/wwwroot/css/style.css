@@ -10806,7 +10806,7 @@ div#wrapper.open > .offcanvas-mask {
     height: 100%;
     position: absolute;
     background-color: #b61924;
-    background-image: url(../images/slide.jpg);
+    background-image: url(../images/slide.webp);
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat

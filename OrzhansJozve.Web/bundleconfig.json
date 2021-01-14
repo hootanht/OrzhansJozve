@@ -32,6 +32,8 @@
       "wwwroot/lib/jquery/dist/jquery.meanmenu.min.js",
       "wwwroot/lib/modernizr-3.6.0/modernizr-3.6.0.min.js",
       "wwwroot/lib/OwlCarousel/owl.carousel.min.js",
+      "wwwroot/lib/jquery-admin/jquery.counterup.min.js",
+      "wwwroot/lib/waypoints/waypoints.min.js",
       "wwwroot/js/main.js"
     ]
   }

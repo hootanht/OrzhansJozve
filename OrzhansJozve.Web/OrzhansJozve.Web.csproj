@@ -47,6 +47,8 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="wwwroot\images\figure\figure4.webp" />
+    <None Include="wwwroot\images\service\service1.webp" />
     <None Include="wwwroot\lib\CKEditor_HTML\ckeditor\.htaccess" />
     <None Include="wwwroot\lib\CKEditor_HTML\ckeditor\adapters\jquery.js" />
     <None Include="wwwroot\lib\CKEditor_HTML\ckeditor\build-config.js" />
