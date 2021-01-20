@@ -81,7 +81,7 @@ steps:
     password: 'hootanHT1376'
     rootDirectory: '$(Build.SourcesDirectory)/testpath/OrzhansJozve.Web'
     filePatterns: '**'
-    remoteDirectory: '/deploy.orzhansjozve.ir'
+    remoteDirectory: '/git.orzhansjozve.ir'
     enableUtf8: true
     cleanContents: false
     preservePaths: true
