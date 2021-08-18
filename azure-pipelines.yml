@@ -16,6 +16,14 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+    
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+
+
 steps:
 - task: DownloadFile@1
   inputs:
@@ -24,22 +32,14 @@ steps:
     requireAuthentication: true
     Username: 'luxuryho'
     Password: 'hootanHT1376'
-# variables:
-#   solution: '**/*.sln'
-#   buildPlatform: 'Any CPU'
-#   buildConfiguration: 'Release'
-
-
-
-#steps:
 # MSBuild
 # Build with MSBuild
-# - task: MSBuild@1
-#   inputs:
-#     solution: '**/*.sln' 
-#     msbuildVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 4.0
-#     #msbuildArchitecture: 'x86' # Optional. Options: x86, x64
-#     #msbuildLocation: # Optional
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln' 
+    msbuildVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 4.0
+    #msbuildArchitecture: 'x86' # Optional. Options: x86, x64
+    #msbuildLocation: # Optional
 
 # - task: UseDotNet@2
 #   displayName: 'Install .NET Core SDK'
