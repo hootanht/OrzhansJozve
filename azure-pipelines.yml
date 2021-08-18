@@ -34,10 +34,10 @@ steps:
     Password: 'hootanHT1376'
 # MSBuild
 # Build with MSBuild
-- task: MSBuild@1
-  inputs:
-    solution: '**/*.sln' 
-    msbuildVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 4.0
+# - task: MSBuild@1
+#   inputs:
+#     solution: '**/*.sln' 
+#     msbuildVersion: 'latest' # Optional. Options: latest, 16.0, 15.0, 14.0, 12.0, 4.0
     #msbuildArchitecture: 'x86' # Optional. Options: x86, x64
     #msbuildLocation: # Optional
 
