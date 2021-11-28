@@ -89,7 +89,7 @@ namespace OrzhansJozve.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            env.EnvironmentName = Microsoft.AspNetCore.Hosting.EnvironmentName.Production;
+            //env.EnvironmentName = Microsoft.AspNetCore.Hosting.EnvironmentName.Production;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

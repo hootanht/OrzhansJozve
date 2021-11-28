@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OrzhansJozve.DomainClass.Domain;
 using System;
@@ -8,12 +9,8 @@ using System.Threading.Tasks;
 
 namespace OrzhansJozve.DataLayer.Context
 {
-    public class OrzhansJozve_DbContext : IdentityDbContext
+    public class OrzhansJozve_DbContext : IdentityDbContext<IdentityUser>
     {
-        public OrzhansJozve_DbContext()
-        {
-
-        }
         public OrzhansJozve_DbContext(DbContextOptions<OrzhansJozve_DbContext> options) : base(options)
         {
 

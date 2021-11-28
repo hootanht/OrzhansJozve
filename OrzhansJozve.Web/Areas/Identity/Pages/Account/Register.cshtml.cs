@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OrzhansJozve.Web.Areas.Identity.Pages.Account
 {
-    [Authorize]
+    //[Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
